@@ -25,36 +25,39 @@ public class Main {
                 List<String> nodes = new ArrayList<>();
                 for (Object n : nodesArray) nodes.add((String) n);
 
-                // Input stats
+                // === Input stats ===
                 Map<String, Object> inputStats = new LinkedHashMap<>();
                 inputStats.put("vertices", nodes.size());
                 inputStats.put("edges", edgesArray.size());
 
-                // Run Prim's Algorithm
+                // === Run Prim's Algorithm ===
                 JSONObject primResult = PrimAlgorithm.runPrim(nodes, edgesArray);
 
-                // Build ordered result object
+                // === Run Kruskal's Algorithm ===
+                JSONObject kruskalResult = KruskalAlgorithm.runKruskal(nodes, edgesArray);
+
+                // === Build ordered result object ===
                 Map<String, Object> graphResult = new LinkedHashMap<>();
                 graphResult.put("graph_id", graphId);
                 graphResult.put("input_stats", inputStats);
                 graphResult.put("prim", primResult);
-                graphResult.put("kruskal", new LinkedHashMap<>()); // placeholder
+                graphResult.put("kruskal", kruskalResult); // 👈 твоя часть добавлена сюда
 
                 resultsList.add(graphResult);
             }
 
-            // Wrap everything under "results"
+            // === Wrap everything under "results" ===
             Map<String, Object> finalOutput = new LinkedHashMap<>();
             finalOutput.put("results", resultsList);
 
-            // Use Gson for pretty printing, preserving order
+            // === Use Gson for pretty printing, preserving order ===
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String prettyJson = gson.toJson(finalOutput);
 
-            // Write output file
+            // === Write output file ===
             try (FileWriter file = new FileWriter("output_results.json")) {
                 file.write(prettyJson);
-                System.out.println("✅ Results written with correct key order and indentation!");
+                System.out.println("✅ Results written with both Prim and Kruskal results!");
             }
 
         } catch (Exception e) {
