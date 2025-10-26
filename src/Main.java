@@ -41,7 +41,7 @@ public class Main {
                 graphResult.put("graph_id", graphId);
                 graphResult.put("input_stats", inputStats);
                 graphResult.put("prim", primResult);
-                graphResult.put("kruskal", kruskalResult); // 👈 твоя часть добавлена сюда
+                graphResult.put("kruskal", kruskalResult);
 
                 resultsList.add(graphResult);
             }
