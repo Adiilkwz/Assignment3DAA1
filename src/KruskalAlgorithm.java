@@ -2,43 +2,6 @@ import java.util.*;
 import org.json.simple.*;
 
 public class KruskalAlgorithm {
-
-    static class Edge implements Comparable<Edge> {
-        String from, to;
-        double weight;
-
-        Edge(String f, String t, double w) {
-            from = f;
-            to = t;
-            weight = w;
-        }
-
-        @Override
-        public int compareTo(Edge other) {
-            return Double.compare(this.weight, other.weight);
-        }
-    }
-
-    static class UnionFind {
-        Map<String, String> parent = new HashMap<>();
-
-        public void makeSet(Collection<String> vertices) {
-            for (String v : vertices) parent.put(v, v);
-        }
-
-        public String find(String v) {
-            if (!parent.get(v).equals(v))
-                parent.put(v, find(parent.get(v))); // path compression
-            return parent.get(v);
-        }
-
-        public void union(String a, String b) {
-            String rootA = find(a);
-            String rootB = find(b);
-            if (!rootA.equals(rootB)) parent.put(rootA, rootB);
-        }
-    }
-
     @SuppressWarnings("unchecked")
     public static JSONObject runKruskal(List<String> nodes, JSONArray edges) {
         List<Edge> edgeList = new ArrayList<>();

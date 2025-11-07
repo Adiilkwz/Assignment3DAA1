@@ -1,25 +1,7 @@
 import java.util.*;
 import org.json.simple.*;
-import java.util.ArrayList;
 
 public class PrimAlgorithm {
-
-    static class Edge {
-        String from, to;
-        double weight;
-        Edge(String f, String t, double w) { from = f; to = t; weight = w; }
-    }
-
-    static class Node implements Comparable<Node> {
-        String vertex;
-        double cost;
-        String parent;
-        Node(String v, double c, String p) { vertex = v; cost = c; parent = p; }
-        public int compareTo(Node other) {
-            return Double.compare(this.cost, other.cost);
-        }
-    }
-
     @SuppressWarnings("unchecked")
     public static JSONObject runPrim(List<String> nodes, JSONArray edges) {
         // Build adjacency list
